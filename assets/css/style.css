@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding:0;
+}
+
+h2 {
+    text-align: center;
+    background-image: linear-gradient(to right, #3B6DC3, #261061);
+}
+
+.event-columns {
+    display: flex;
+    margin: 0 auto;
+}
+
+.row, .col {
+    border: 1px solid red;
+}
+
+.col {
+    color: white;
+    text-align: left;
+    margin: 0 1%;
+    background-color: #33475A;
+}
