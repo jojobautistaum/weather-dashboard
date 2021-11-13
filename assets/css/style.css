@@ -1,13 +1,13 @@
 * {
     box-sizing: border-box;
     margin: 0;
-    padding:0;
+    padding: 0;
 }
 
 h2 {
     color: white;
     text-align: center;
-    background-image: linear-gradient(to right, #3B6DC3, #261061);
+    background-image: linear-gradient(to right, #3E70C4, #271061);
 }
 
 .row, .col, div {
@@ -32,4 +32,11 @@ button, input {
 button {
     background-color: #5AA2E9;
     color: white;
+    margin-top: 8%;
+}
+
+button + p {
+    margin-top: 4%;
+    width: 12em;
+    border-bottom: 2px solid #B1B1B1;
 }
