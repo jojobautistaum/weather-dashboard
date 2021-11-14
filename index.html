@@ -9,19 +9,19 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
-    <main class="container">
+    <main class="container-fluid">
         <section class="row">
             <div class="col-12">
                 <h2>Weather Dashboard</h2>
             </div>
         </section>
         <section class="row">
-            <div class="col-3">
+            <form class="col-3">
                 <h4>Search for a City:</h4>
-                <input type="text">
-                <button>Search</button>
+                <input type="text" name="city" id="city">
+                <input type="submit" value="Search" id="btn"/>
                 <p></p>
-            </div>
+            </form>
             <div class="col-9">
                 <h4>Atlanta</h4>
                 <p>Temp:</p>
@@ -72,8 +72,8 @@
             </div>
         </section>
         
-
     </main>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>

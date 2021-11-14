@@ -25,18 +25,18 @@ h5 {
     background-color: #33475A;
 }
 
-button, input {
+#btn, #city {
     width: 12em;
 }
 
-button {
+#btn {
     background-color: #5AA2E9;
     color: white;
-    margin-top: 8%;
+    margin-top: 3%;
 }
 
-button + p {
-    margin-top: 4%;
+#btn + p {
+    margin-top: 3%;
     width: 12em;
     border-bottom: 2px solid #B1B1B1;
 }
