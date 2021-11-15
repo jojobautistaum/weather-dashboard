@@ -87,7 +87,7 @@ function addButton(city) {
             }
         }
     }
-    document.querySelector("#searches").textContent = "Recent Searches";
+    document.querySelector("#searches").textContent = "Recent Cities";
     foundCities.unshift(city);
     localStorage.setItem("Found Cities", foundCities);
     var searchedBtn = document.createElement("button");

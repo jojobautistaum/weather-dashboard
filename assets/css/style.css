@@ -10,10 +10,6 @@ h2 {
     background-image: linear-gradient(to right, #3E70C4, #271061);
 }
 
-/* .row, .col, div {
-    border: 1px solid red;
-} */
-
 h5 {
     margin-left: 1%;
 }
@@ -27,7 +23,7 @@ h5 {
 }
 
 #btn, #city, .btns{
-    width: 12em;
+    width: 14em;
 }
 
 #btn, .btns {
@@ -36,8 +32,14 @@ h5 {
     margin-top: 3%;
 }
 
+.btns {
+    background-color: #B7B7B7;
+    color: black;
+    margin-top: 3%;
+}
+
 #btn + p {
     margin-top: 3%;
-    width: 12em;
+    width: 14em;
     border-bottom: 2px solid #B1B1B1;
 }
