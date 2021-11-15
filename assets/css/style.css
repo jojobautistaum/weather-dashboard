@@ -10,9 +10,9 @@ h2 {
     background-image: linear-gradient(to right, #3E70C4, #271061);
 }
 
-.row, .col, div {
+/* .row, .col, div {
     border: 1px solid red;
-}
+} */
 
 h5 {
     margin-left: 1%;
@@ -26,11 +26,11 @@ h5 {
     background-color: #33475A;
 }
 
-#btn, #city {
+#btn, #city, .btns{
     width: 12em;
 }
 
-#btn {
+#btn, .btns {
     background-color: #5AA2E9;
     color: white;
     margin-top: 3%;

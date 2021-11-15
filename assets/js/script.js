@@ -1,23 +1,33 @@
 var city = "";
-var searchedCities = [];
+var foundCities = [];
+var searchedEl = document.querySelector("#recent-searches");
 
 // Find the city
-function findCity(city) {
+function findCity(city, newSearch) {
     var locationUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=b7609117c1b58fc397022fe7414e5f44`;
     fetch(locationUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                if (data){
+                if(data.length){
+                    console.log(data);
                     checkWeather(data[0].lat,data[0].lon);
-                }
-                else {
-                    return alert("Can't find the city.");
+                    if (newSearch) {
+                        city = capsFirstLetter();
+                        
+                        // Add button for recent searches
+                        cityList(true);
+                    }
+                } else {
+                    alert("The city location is unknown: " + city);
                 }
             });
         }
         else {
-            return alert("Something went wrong");
+            alert("Error: " + response.statusText);
         }
+    })
+    .catch(function(error){
+        alert("Unable to connect to Open Weather. - " + error);
     });
 }
 
@@ -32,17 +42,15 @@ function checkWeather (latitude, longitude) {
                 for (var i = 1; i < 6; i++){
                     weatherForecast(i,data.daily[i].dt, data.daily[i].temp.day, data.daily[i].wind_speed, data.daily[i].humidity, data.daily[i].weather[0].icon);
                 }
-                console.log(data);
-                searchedCities.push(city);
-                console.log(searchedCities);
-                
             });
         }
         else {
-            return alert("Can't find the weather info");
+            alert("Error: " + response.statusText);
         }
+    })
+    .catch(function(error){
+        alert("Unable to connect to Open Weather. - " + error);
     });
-
 }
 
 // Show weather info today
@@ -71,10 +79,63 @@ function weatherForecast(day, date, temp, wind, humidity, icon){
         $("#hum-" + day).text("Humidity: " + humidity + " %");
 }
 
+// Create button for recent search
+function addButton(city) {
+    console.log(foundCities);
+    // if(foundCities.length === 0 || !(foundCities.indexOf(city))){
+        // The city is not in the recent searches yet
+        foundCities.push(city);
+        localStorage.setItem("Found Cities", foundCities);
+        var searchedBtn = document.createElement("button");
+        searchedBtn.classList.add("btns");
+        searchedBtn.textContent = city;
+        searchedEl.appendChild(searchedBtn);
+    // }
+}
+
+// Retrieve City list from localStorage
+function cityList (addBtn){
+    // We have a new city for recently searched
+    if (addBtn){
+        addButton(city);
+    }
+    else {
+        // Update foundCities array from localStorage if not empty
+        if (localStorage.getItem("Found Cities") !== null){
+            foundCities = localStorage.getItem("Found Cities").split(",");
+            // Our App just started let's populate the recent searches buttons
+            for (var i = 0; i < foundCities.length; i++){
+                addButton(foundCities[i]);
+            }
+        }
+    }
+}
+
+// We will capitalized first letter of each word
+function capsFirstLetter(){
+    city = city.toLowerCase();
+    var cityArr = city.split(" ");
+    for (var i =0; i < cityArr.length; i++){
+        cityArr[i] = cityArr[i][0].toUpperCase() + cityArr[i].slice(1);
+    }
+    city = cityArr.join(" ");
+    
+    return city;
+}
+
+// New city search listener
 $("form").submit(function(event) {
     event.preventDefault();
     city = document.querySelector("#city").value;    
     console.log(city);
-    findCity(city);
     
+    findCity(city,true);
 });
+
+// Starting our App
+$(document).ready(function() {
+    // Look for existing recent searches from localStorage but don't add button
+    cityList(false);
+})
+
+// Recent search listener
