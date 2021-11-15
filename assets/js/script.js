@@ -1,4 +1,5 @@
-
+var city = "";
+var searchedCities = [];
 
 // Find the city
 function findCity(city) {
@@ -6,8 +7,6 @@ function findCity(city) {
     fetch(locationUrl).then(function(response) {
         if (response) {
             response.json().then(function(data) {
-                console.log(data[0].lat);
-                console.log(data[0].lon);
                 checkWeather(data[0].lat,data[0].lon)
             });
         }
@@ -23,11 +22,13 @@ function checkWeather (latitude, longitude) {
     fetch(weatherUrl).then(function(response) {
         if (response) {
             response.json().then(function(data) {
-                console.log(data.current.dt);
-                console.log(data.current.temp);
-                console.log(data.current.wind_speed);
-                console.log(data.current.uvi);
+                weatherToday(data.current.dt, data.current.temp, data.current.wind_speed, data.current.humidity, data.current.uvi, data.current.weather[0].icon);
+                // Loop through 5-day forecast
+                for (var i = 1; i < 6; i++){
+                    weatherForecast(i,data.daily[i].dt, data.daily[i].temp.day, data.daily[i].wind_speed, data.daily[i].humidity);
+                }
                 console.log(data);
+                searchedCities.push(city);
             });
         }
         else {
@@ -37,10 +38,39 @@ function checkWeather (latitude, longitude) {
 
 }
 
+// Show weather info today
+function weatherToday(date, temp, wind, humidity, uv, icon){
+    var today = new Date(date * 1000).toLocaleString("en-US",{month: "2-digit", day: "2-digit", year: "numeric"});
+    var wicon = "https://openweathermap.org/img/wn/${icon}@2x.png";
+    const markup = `
+    <span>
+        <img src=${wicon}>
+    </span>`;
+
+    $("now-city").innerHTML = markup;
+
+    $("#now-city").text(city + " (" + today + ") " );
+    $("#now-temp").text("Temp: " + temp + "\xB0F");
+    $("#now-wind").text("Wind: " + wind + " MPH");
+    $("#now-humid").text("Humidity: " + humidity + " %");
+    $("#now-uv").text("UV Index: " + uv);
+}
+
+// Show weather day forecast 
+function weatherForecast(day, date, temp, wind, humidity, icon){
+        var forecastDay = new Date(date * 1000).toLocaleString("en-US",{month: "2-digit", day: "2-digit", year: "numeric"}); 
+        var wicon = `https://openweathermap.org/img/w/${icon}.png`;
+
+        $("#date-" + day).text(forecastDay);
+        $("#icon-" + day).text(wicon);
+        $("#temp-" + day).text("Temp: " + temp + "\xB0F");
+        $("#wind-" + day).text("Wind: " + wind + " MPH");
+        $("#hum-" + day).text("Humidity: " + humidity + " %");
+}
+
 $("form").submit(function(event) {
     event.preventDefault();
-    
-    var city = document.querySelector("#city").value;
+    city = document.querySelector("#city").value;    
     console.log(city);
     findCity(city);
     
