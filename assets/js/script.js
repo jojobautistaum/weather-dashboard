@@ -9,13 +9,11 @@ function findCity(city, newSearch) {
         if (response.ok) {
             response.json().then(function(data) {
                 if(data.length){
-                    console.log(data);
                     checkWeather(data[0].lat,data[0].lon);
                     if (newSearch) {
                         city = capsFirstLetter();
-                        
-                        // Add button for recent searches
-                        cityList(true);
+                        // Add a button for the recent search
+                        cityList(false);
                     }
                 } else {
                     alert("The city location is unknown: " + city);
@@ -81,32 +79,41 @@ function weatherForecast(day, date, temp, wind, humidity, icon){
 
 // Create button for recent search
 function addButton(city) {
-    console.log(foundCities);
-    // if(foundCities.length === 0 || !(foundCities.indexOf(city))){
-        // The city is not in the recent searches yet
-        foundCities.push(city);
-        localStorage.setItem("Found Cities", foundCities);
-        var searchedBtn = document.createElement("button");
-        searchedBtn.classList.add("btns");
-        searchedBtn.textContent = city;
-        searchedEl.appendChild(searchedBtn);
-    // }
+    // Make sure that there is no duplicate city
+    if (foundCities.length > 0) {
+        for (var i = 0; i < foundCities.length; i++) {
+            if (city === foundCities[i]) {
+                return;
+            }
+        }
+    }
+    document.querySelector("#searches").textContent = "Recent Searches";
+    foundCities.unshift(city);
+    localStorage.setItem("Found Cities", foundCities);
+    var searchedBtn = document.createElement("button");
+    searchedBtn.classList.add("btns");
+    searchedBtn.type = "button";
+    searchedBtn.textContent = city;
+    searchedEl.prepend(searchedBtn);
 }
 
-// Retrieve City list from localStorage
-function cityList (addBtn){
+// Add recent search buttons
+function cityList (appStarting){
     // We have a new city for recently searched
-    if (addBtn){
+    if (!appStarting){
         addButton(city);
     }
     else {
         // Update foundCities array from localStorage if not empty
         if (localStorage.getItem("Found Cities") !== null){
-            foundCities = localStorage.getItem("Found Cities").split(",");
+            // Use cities as temp array so we can add the buttons as if it's new
+            var cities = localStorage.getItem("Found Cities").split(",");
             // Our App just started let's populate the recent searches buttons
-            for (var i = 0; i < foundCities.length; i++){
-                addButton(foundCities[i]);
+            for (var i = 0; i < cities.length; i++){
+                addButton(cities[i]);
             }
+            // After adding the buttons, populate our foundCities array.
+            foundCities = cities;
         }
     }
 }
@@ -127,15 +134,25 @@ function capsFirstLetter(){
 $("form").submit(function(event) {
     event.preventDefault();
     city = document.querySelector("#city").value;    
-    console.log(city);
-    
-    findCity(city,true);
+    if (city) {
+        findCity(city,true);
+    }
+    else{
+        alert("Please enter a city name!");
+    }
+});
+
+// Recent search listener
+$("#recent-searches").click(function(event) {
+    event.preventDefault();
+    city = $(event.target).text();
+    // Not a new search
+    findCity(city,false)
 });
 
 // Starting our App
 $(document).ready(function() {
-    // Look for existing recent searches from localStorage but don't add button
-    cityList(false);
+    // Look for existing recent searches from localStorage then add all the buttons
+    cityList(true);
 })
 
-// Recent search listener
