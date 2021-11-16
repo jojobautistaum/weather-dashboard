@@ -16,15 +16,16 @@
             </div>
         </section>
         <section class="row">
+            <!-- City to search for weather info -->
             <form class="col-3">
-                <h4>Search for a City:</h4>
+                <h4 id="city-name">Search for a City:</h4>
                 <input type="text" name="city" id="city" autocomplete="off">
                 <input type="submit" value="Search" id="btn"/>
                 <p id="searches"></p>
                 <div id="recent-searches"></div>
             </form>
-            
-            <div class="col-9">
+            <!-- Weather Info Section -->
+            <div class="col offset-sm-1 weather">
                 <h4 id="now-city">City</h4>
                 <p id="now-temp">Temp:</p>
                 <p id="now-wind">Wind:</p>
@@ -33,36 +34,37 @@
                 <div class="row">
                     <h5>5-Day Forecast:</h5>
                 </div>
+                <!-- 5-day weather forecast -->
                 <div class="row">
-                    <div class="col">
+                    <div class="col-lg col-md-3 col-sm-5">
                         <p id="date-1">Date</p>
                         <img id="icon-1" />
                         <p id="temp-1">Temp:</p>
                         <p id="wind-1">Wind:</p>
                         <p id="hum-1">Humidity:</p>
                     </div>
-                    <div class="col">
+                    <div class="col-lg col-md-3 col-sm-5">
                         <p id="date-2">Date</p>
                         <img id="icon-2" />
                         <p id="temp-2">Temp:</p>
                         <p id="wind-2">Wind:</p>
                         <p id="hum-2">Humidity:</p>
                     </div>
-                    <div class="col">
+                    <div class="col-lg col-md-3 col-sm-5">
                         <p id="date-3">Date</p>
                         <img id="icon-3" />
                         <p id="temp-3">Temp:</p>
                         <p id="wind-3">Wind:</p>
                         <p id="hum-3">Humidity:</p>
                     </div>
-                    <div class="col">
+                    <div class="col-lg col-md-3 col-sm-5">
                         <p id="date-4">Date</p>
                         <img id="icon-4" />
                         <p id="temp-4">Temp:</p>
                         <p id="wind-4">Wind:</p>
                         <p id="hum-4">Humidity:</p>
                     </div>
-                    <div class="col">
+                    <div class="col-lg col-md-3 col-sm-5">
                         <p id="date-5">Date</p>
                         <img id="icon-5" />
                         <p id="temp-5">Temp:</p>
@@ -70,10 +72,8 @@
                         <p id="hum-5">Humidity:</p>
                     </div>
                 </div>
-
             </div>
         </section>
-        
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
