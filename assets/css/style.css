@@ -48,6 +48,26 @@ h5 {
     border-bottom: 2px solid #B1B1B1;
 }
 
+.uv-low {
+    background-color: #41B31D;
+}
+
+.uv-moderate {
+    background-color: #F4C120;
+}
+
+.uv-high {
+    background-color: #F3701A;
+}
+
+.uv-veryhigh {
+    background-color: #F01015;
+}
+
+.uv-extreme {
+    background-color: #826CF7;
+}
+
 @media screen and (max-width: 1055px ) {
     #btn, #city, .btns, #btn + p{
         width: 12em;
