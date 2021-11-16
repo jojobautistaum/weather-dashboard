@@ -59,13 +59,14 @@ function weatherToday(date, temp, wind, humidity, uv, icon){
     var wicon = `https://openweathermap.org/img/w/${icon}.png`;
     const imgSrc = `<img src=${wicon}>`;
     var uvIndex = document.querySelector("#now-uv");
-
+    
     $("#now-city").text(city + " (" + today + ") " );
     $("#now-city").append(imgSrc);
     $("#now-temp").text("Temp: " + temp + "\xB0F");
     $("#now-wind").text("Wind: " + wind + " MPH");
     $("#now-humid").text("Humidity: " + humidity + " %");
     // Color coding UV Index risk
+    uv = parseFloat(uv);
     if (uv <= 2) {
         uvIndex.className = "uv-low";
     } else if (uv <= 5) {
