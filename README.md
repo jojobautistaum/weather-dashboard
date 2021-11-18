@@ -3,6 +3,8 @@
 ## Description
 This app will allow you to enter a city and display the current and 5-day weather forecast. It will display the dates, the temperature, the wind speed, the humidity, the UV index, and the image representation of the weather condition.
 
+**Note:** ***You are required to use your own Open Weather API-Key***
+
 ## Tech/Framework
 * HTML
 * CSS
