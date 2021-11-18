@@ -1,7 +1,7 @@
 # Weather Dashboard
 
 ## Description
-This app will allow you to enter a city and display the current and 5-day weather forecast. It will display the dates, the temperature, the wind speed, the humidity, the UV index, and the image representation of the weather condition.
+This app will allow you to enter a city and display the current and 5-day weather forecast. It will display the dates, the temperature, the wind speed, the humidity, the UV index, and the image representation of the weather condition. The default city is Minneapolis.
 
 **Note:** ***You are required to use your own Open Weather API-Key***
 
@@ -26,6 +26,7 @@ This app will allow you to enter a city and display the current and 5-day weathe
 * Responsive screen layout.
 
 ## Screenshots
+* Required API-Key <br/> ![API Key](./assets/images/apikey-required.jpg)
 * New Search <br/> ![Search City Name](./assets/images/new-search.jpg)
 * Recently searched city sample 1 <br/> ![Recent City 1](./assets/images/recent-city1.jpg)
 * Recently searched city sample 2 <br/> ![Recent City 1](./assets/images/recent-city2.jpg)
