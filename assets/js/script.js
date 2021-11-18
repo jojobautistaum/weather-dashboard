@@ -1,21 +1,28 @@
 var city = "";
 var foundCities = [];
 var searchedEl = document.querySelector("#recent-searches");
+var apiKey = ""
 
 // Find the city
 function findCity(city, newSearch) {
-    var locationUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=b7609117c1b58fc397022fe7414e5f44`;
+    var locationUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
     
     fetch(locationUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
                 if(data.length){
-                    checkWeather(data[0].lat,data[0].lon);
                     if (newSearch) {
                         capsFirstLetter();
                         // false: Add a button to the recent search if not already listed
                         cityList(false);
                     }
+                    else {
+                        $("header").attr("style", "display: none !important");
+                        $("main").attr("style", "display: initial ! important");
+                        // true: starting the App
+                        cityList(true);
+                    }
+                    checkWeather(data[0].lat,data[0].lon);
                 } else {
                     alert("The city location is unknown: " + city);
                 }
@@ -32,7 +39,7 @@ function findCity(city, newSearch) {
 
 // Pull the weather info
 function checkWeather (latitude, longitude) {
-    var weatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&limit=5&appid=b7609117c1b58fc397022fe7414e5f44`;
+    var weatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&limit=5&appid=${apiKey}`;
     
     fetch(weatherUrl).then(function(response) {
         if (response.ok) {
@@ -147,7 +154,7 @@ function capsFirstLetter(){
  }
 
 // New city search listener
-$("form").submit(function(event) {
+$("#city-form").submit(function(event) {
     event.preventDefault();
     city = document.querySelector("#city").value;    
     if (city) {
@@ -169,7 +176,22 @@ $("#recent-searches").click(function(event) {
 
 // Starting our App
 $(document).ready(function() {
-    // true: Look for recent searches from localStorage then add all the buttons
-    cityList(true);
-})
+    // Default city
+    city = "Minneapolis";
+    $("main").attr("style", "display: none ! important");
+    // We will require the user to enter their API-Key
+    $("#api-key").submit(function(event){
+        event.preventDefault();
+        apiKey = document.querySelector("#apiText").value;  
+        if (apiKey) {
+            // Show weather fo our default city at startup
+            // false: will not create button for recently searched
+            findCity(city,false);
+        }
+        else{
+            alert("Please enter your API Key!");
+            window.location.reload();
+        }
+    });
+});
 

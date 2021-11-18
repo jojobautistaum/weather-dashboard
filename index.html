@@ -9,15 +9,27 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
+    <header>
+        <section>
+            <h2>Weather Dashboard</h2>
+        </section>
+        <section id="require-api">
+            <form id="api-key">
+                <Label>Please Enter your required Open Weather API-Key</Label><br/>
+                <input type="text" name="apiText" id="apiText" autocomplete="off"><br/>
+                <input type="submit" value="Submit" id="btnApi" />
+            </form>
+        </section>
+    </header>
     <main class="container-fluid">
         <section class="row">
             <div class="col-12">
                 <h2>Weather Dashboard</h2>
             </div>
         </section>
-        <section class="row">
+        <section id="main-section" class="row">
             <!-- City to search for weather info -->
-            <form class="col-3">
+            <form id="city-form" class="col-3">
                 <h4 id="city-name">Search for a City:</h4>
                 <input type="text" name="city" id="city" autocomplete="off">
                 <input type="submit" value="Search" id="btn"/>
