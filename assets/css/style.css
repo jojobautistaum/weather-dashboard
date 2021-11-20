@@ -1,7 +1,20 @@
 * {
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
+    padding: 2px;
+}
+
+.forecast div {
+    max-width: 9.25em;
+    min-width: 9.25em;
+}
+
+#weather {
+    margin-right: 20%;
+}
+
+#main-section {
+    flex-wrap: nowrap;
 }
 
 #api-key {
@@ -28,15 +41,18 @@ h5 {
     margin-left: 1%;
 }
 
-.col-lg, .col-md-3, .col-sm {
+.col-lg, .col-md-3, .col-sm-4 {
     color: white;
     text-align: left;
-    margin: 0 1%;
+    margin-left: 1%;
+    margin-right: 0;
     padding-left: 5px;
+    min-width: 23%;
+    max-width: max-content;
     background-color: #33475A;
 }
 
-.col-md-3, .col-sm-5 {
+.col-md-3, .col-sm-4 {
     margin-bottom: 3%;
 }
 
@@ -82,7 +98,8 @@ h5 {
     background-color: #826CF7;
 }
 
-@media screen and (max-width: 1055px ) {
+/* col-md >= 992px, col-lg >=1200 */
+@media screen and (max-width: 1070px ) {
     #btn, #city, .btns, #btn + p{
         width: 12em;
     }
@@ -90,8 +107,13 @@ h5 {
     .col {
         margin-left: 0;
     }
+
+    #weather {
+        margin-left: -15px;
+    }
 }
 
+/* col-sm >= 768px */
 @media screen and (max-width: 856px) {
     h4 {
         font-size: 20px;
@@ -102,9 +124,11 @@ h5 {
     }
 }
 
-@media screen and (max-width: 733px) {
-    .weather {
-        margin-left: 50px;
+/* col-sm >= 768px */
+@media screen and (max-width: 785px) {
+    #weather {
+        margin-left: 70px;
+        margin-right: 0;
     }
 
     h4 {
@@ -113,13 +137,13 @@ h5 {
 }
 
 @media screen and (max-width: 500px) {
-    .weather {
+    #weather {
         margin-left: 75px;
     }
 }
 
 @media screen and (max-width: 400px) {
-    .weather {
+    #weather {
         margin-left: 100px;
     } 
 }
